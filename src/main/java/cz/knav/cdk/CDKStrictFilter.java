@@ -34,7 +34,7 @@ import cz.incad.kramerius.utils.IOUtils;
 public class CDKStrictFilter extends AbstractCriterium implements RightCriterium {
 
     public static final Logger LOGGER = Logger.getLogger(CDKStrictFilter.class.getName());
-    
+
     public static String XPATH = 
         "//kramerius:replicatedFrom/text()";
 
@@ -55,7 +55,7 @@ public class CDKStrictFilter extends AbstractCriterium implements RightCriterium
             String testUrl = disectURL(this.xpfactory, docRelsExt);
             if (testUrl != null) {
                 int code = connect(testUrl);
-                if ((code == HttpServletResponse.SC_OK) || (code == HttpServletResponse.SC_NOT_MODIFIED)) {
+                if ((code == HttpServletResponse.SC_OK) || (code == HttpServletResponse.SC_NOT_MODIFIED) || (code == HttpServletResponse.SC_NOT_FOUND)) {
                     return EvaluatingResult.TRUE;
                 } else return EvaluatingResult.FALSE;
             } else return EvaluatingResult.FALSE;
@@ -76,13 +76,6 @@ public class CDKStrictFilter extends AbstractCriterium implements RightCriterium
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
             respCode = connection.getResponseCode();
-            if ((respCode == HttpServletResponse.SC_INTERNAL_SERVER_ERROR)) {
-                Object errContent = connection.getErrorStream();
-                String string = IOUtils.readAsString(((InputStream)errContent), Charset.forName("UTF-8"), true);
-                int index = string.indexOf("java.io.FileNotFoundException:");
-                if (index >0) return HttpServletResponse.SC_NOT_FOUND;
-                else return HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
-            }
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -100,7 +93,9 @@ public class CDKStrictFilter extends AbstractCriterium implements RightCriterium
         if (length > 0) {
             int last = length - 1;
             String n = ((Text)nlist.item(last)).getTextContent();
-            String replaced = n.replace("handle/", "img?pid=")+"&stream=IMG_FULL&action=GETRAW";
+            //TEXT_OCR becuse of data 
+            ///http://localhost:8080/search/img?uuid=uuid:4eac74b0-e92c-11dc-9fa1-000d606f5dc6&stream=TEXT_OCR&action=GETRAW
+            String replaced = n.replace("handle/", "img?uuid=")+"&stream=TEXT_OCR&action=GETRAW";
             return replaced;
         } else {
             LOGGER.log(Level.SEVERE,"no replicated sources");

@@ -26,6 +26,6 @@ public class CDKStrictFilterTest {
         Document document = XMLUtils.parseDocument(is, true);
         XPathFactory factory = XPathFactory.newInstance();
         String testURL = CDKStrictFilter.disectURL(factory, document);
-        Assert.assertEquals("http://cdk-test.lib.cas.cz/search/img?pid=uuid:e15bdb43-41d4-48c7-bb64-7d3d1e2f769c&stream=IMG_FULL&action=GETRAW", testURL);
+        Assert.assertEquals("http://cdk-test.lib.cas.cz/search/img?uuid=uuid:e15bdb43-41d4-48c7-bb64-7d3d1e2f769c&stream=TEXT_OCR&action=GETRAW", testURL);
     }
 }
