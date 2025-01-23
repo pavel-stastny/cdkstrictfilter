@@ -20,5 +20,11 @@ Prosím, popište chybu co nejpodrobněji.
 ## Očekávané chování
 Popište, co jste očekávali.
 
+# Priorita
+
+- [ ] Nízká
+- [ ] Střední
+- [ ] Vysoká
+
 ## Screenshoty nebo logy
 Pokud je to relevantní, připojte screenshoty nebo logy.
