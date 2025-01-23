@@ -1,7 +1,7 @@
 ---
 name: "Bug report"
-about: "Nahlášení chyby"
-title: "[BUG] Popište chybu"
+about: "Nahlášení chybuj"
+title: "[TEST] Popište chybu"
 labels: 
   - week
   - bug
