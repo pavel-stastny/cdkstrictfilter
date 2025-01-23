@@ -2,7 +2,10 @@
 name: "Bug report"
 about: "Nahlášení chyby"
 title: "[BUG] Popište chybu"
-labels: bug pavel-stastny
+labels: 
+  - 1week
+  - bug
+  - urgent
 assignees: ""
 ---
 
